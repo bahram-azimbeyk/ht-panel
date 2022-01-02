@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
-import { NbActionsModule, NbButtonModule, NbCardModule, NbDatepickerModule, NbFormFieldModule, NbIconModule, NbInputModule, NbListModule, NbMenuModule, NbRadioModule, NbSelectModule, NbSpinnerModule, NbTabsetModule, NbTooltipModule, NbUserModule } from '@nebular/theme';
+import {
+  NbActionsModule, NbButtonModule, NbCardModule, NbDatepickerModule, NbFormFieldModule,
+  NbIconModule, NbInputModule, NbListModule, NbMenuModule, NbRadioModule, NbSelectModule, NbSpinnerModule,
+  NbTabsetModule, NbTooltipModule, NbUserModule,
+} from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
