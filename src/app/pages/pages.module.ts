@@ -7,7 +7,6 @@ import {
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
-import { ECommerceModule } from './e-commerce/e-commerce.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -34,7 +33,6 @@ const NB_MODULES = [
     PagesRoutingModule,
     ThemeModule,
     NbMenuModule,
-    ECommerceModule,
     NB_MODULES,
   ],
   declarations: [

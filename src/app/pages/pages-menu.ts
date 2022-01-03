@@ -5,7 +5,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'سوالات',
     icon: 'bulb-outline',
     link: '/questions',
-    // home: true,
+    home: true,
   },
   {
     title: 'تست',

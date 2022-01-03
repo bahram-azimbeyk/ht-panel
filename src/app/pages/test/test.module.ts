@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
-import { QuestionsComponent } from './questions.component';
+import { TestComponent } from './test.component';
 import { PagesModule } from '../pages.module';
 
 @NgModule({
   imports: [
-    PagesModule,
+    PagesModule
   ],
   declarations: [
-    QuestionsComponent,
+    TestComponent,
   ],
 })
-export class QuestionsModule {
+export class TestModule {
 }

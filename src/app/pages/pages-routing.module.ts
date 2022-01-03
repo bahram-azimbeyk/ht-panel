@@ -2,8 +2,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
-import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { QuestionsComponent } from './questions/questions.component';
+import { TestComponent } from './test/test.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [{
   path: '',
@@ -14,10 +15,10 @@ const routes: Routes = [{
       component: QuestionsComponent,
     }, {
       path: 'test',
-      component: ECommerceComponent,
+      component: TestComponent,
     }, {
       path: 'settings',
-      component: ECommerceComponent,
+      component: SettingsComponent,
     }, {
       path: '',
       redirectTo: 'questions',
