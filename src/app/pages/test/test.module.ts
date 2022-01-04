@@ -4,7 +4,7 @@ import { PagesModule } from '../pages.module';
 
 @NgModule({
   imports: [
-    PagesModule
+    PagesModule,
   ],
   declarations: [
     TestComponent,

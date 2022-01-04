@@ -20,6 +20,7 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],

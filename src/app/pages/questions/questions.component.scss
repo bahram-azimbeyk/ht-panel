@@ -1,0 +1,27 @@
+table {
+  width: 100%;
+}
+
+.example-rate-limit-reached {
+  max-width: 360px;
+  text-align: center;
+}
+
+.mat-column-number {
+  min-width: 80px;
+  padding-right: 0px !important;
+  margin-right: 0;
+  text-align: center;
+}
+.mat-column-keyword {
+  min-width: 100px;
+}
+.mat-column-file {
+  min-width: 100px;
+}
+.mat-column-edit {
+  min-width: 70px;
+}
+button {
+  margin: 0 !important;
+}

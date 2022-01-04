@@ -8,9 +8,16 @@ import {
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { QuestionsModule } from './questions/questions.module';
+import { SettingsModule } from './settings/settings.module';
+import { TestModule } from './test/test.module';
 
 const NB_MODULES = [
+
   NbActionsModule,
   NbButtonModule,
   NbCardModule,
@@ -27,6 +34,9 @@ const NB_MODULES = [
   NbTooltipModule,
   NbFormFieldModule,
   ReactiveFormsModule,
+  FormsModule,
+  MatTableModule,
+  CommonModule,
 ];
 @NgModule({
   imports: [
