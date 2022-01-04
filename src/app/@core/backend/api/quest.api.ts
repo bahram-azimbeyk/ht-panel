@@ -2,28 +2,34 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpService } from './http.service';
+import { Papa } from 'ngx-papaparse';
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuestApi {
   csvToJSON(csv) {
-    const lines = csv.split('\n');
-    const result = [];
-    const headers = lines[0].split(',');
-    for (let i = 1; i < lines.length; i++) {
-      const obj = {};
-      const currentline = lines[i].split(',');
-      for (let j = 0; j < headers.length; j++) {
-        obj[headers[j]] = currentline[j];
-      }
-      result.push(obj);
-    }
-    return result;
+    const res = [];
+    this.papa.parse(csv, {
+      complete: (result) => {
+        const headers = [];
+        result.data[0].forEach(line => {
+          headers.push(line);
+        });
+        for (let i = 1; i < result.data.length; i++) {
+          const obj = {};
+          for (let j = 0; j < headers.length; j++) {
+            obj[headers[j]] = result.data[i][j];
+          }
+          res.push(obj);
+        }
+      },
+    });
+    return res;
   }
 
   header = { observe: 'response', responseType: 'text' };
-  constructor(private api: HttpService) {
+  constructor(private api: HttpService, private papa: Papa) {
   }
   getCsv(): Observable<any> {
     return this.api.get('get_csv', this.header).pipe(map(response => this.csvToJSON(response.body)));
