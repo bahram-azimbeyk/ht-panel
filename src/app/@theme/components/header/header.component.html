@@ -5,18 +5,13 @@
     </a>
     <a class="logo" href="#" (click)="navigateHome()">پنل هوشتل</a>
   </div>
-  <nb-select
-    [selected]="currentTheme"
-    (selectedChange)="changeTheme($event)"
-    status="primary"
-  >
+  <!-- <nb-select [selected]="currentTheme" (selectedChange)="changeTheme($event)" status="primary">
     <nb-option *ngFor="let theme of themes" [value]="theme.value">
-      {{ theme.name }}</nb-option
-    >
-  </nb-select>
+      {{ theme.name }}</nb-option>
+  </nb-select> -->
 </div>
 
-<div class="header-container">
+<!-- <div class="header-container">
   <nb-actions size="small">
     <nb-action class="user-action" *nbIsGranted="['view', 'user']">
       <nb-user
@@ -28,4 +23,4 @@
       </nb-user>
     </nb-action>
   </nb-actions>
-</div>
+</div> -->
