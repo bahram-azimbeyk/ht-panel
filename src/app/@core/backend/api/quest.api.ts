@@ -28,13 +28,14 @@ export class QuestApi {
     return res;
   }
 
-  header = { observe: 'response', responseType: 'text' };
+  getHeader = { observe: 'response', responseType: 'text' };
+  postHeader = { 'Content-Type': 'multipart/form-data', 'accept': 'application/json' };
   constructor(private api: HttpService, private papa: Papa) {
   }
   getCsv(): Observable<any> {
-    return this.api.get('get_csv', this.header).pipe(map(response => this.csvToJSON(response.body)));
+    return this.api.get('get_csv', this.getHeader).pipe(map(response => this.csvToJSON(response.body)));
   }
   updateCsv(file: any): Observable<any> {
-    return this.api.post('upload', file);
+    return this.api.post('upload', file, this.postHeader);
   }
 }
