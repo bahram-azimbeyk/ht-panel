@@ -8,19 +8,44 @@ table {
 }
 
 .mat-column-number {
-  min-width: 80px;
+  max-width: 80px;
   padding-right: 0px !important;
   margin-right: 0;
   text-align: center;
+  border-left: #0000001a solid 1px;
+}
+.mat-column-title {
+  border-left: #0000001a solid 1px;
+  padding-right: 5px !important;
+  padding-left: 10px !important;
+}
+.mat-column-text {
+  border-left: #0000001a solid 1px;
+  padding-right: 5px !important;
+  padding-left: 10px !important;
 }
 .mat-column-keyword {
   min-width: 100px;
+  border-left: #0000001a solid 1px;
+  padding-right: 5px !important;
+  padding-left: 10px !important;
 }
 .mat-column-file {
   min-width: 100px;
+  border-left: #0000001a solid 1px;
+  padding-right: 5px !important;
+  padding-left: 10px !important;
 }
 .mat-column-edit {
   min-width: 70px;
+  border-left: #0000001a solid 1px;
+  text-align: center;
+}
+.mat-column-delete {
+  min-width: 70px;
+  padding-left: 0px !important;
+  margin-right: 0;
+  text-align: center;
 }
 button {
   margin: 0 !important;

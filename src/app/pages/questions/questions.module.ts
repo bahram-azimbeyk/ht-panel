@@ -10,7 +10,6 @@ import { ConfirmDialogComponent } from './confirmDialog/dialog.component';
   imports: [
     PagesModule,
     CommonModule,
-    // BrowserModule,
   ],
   declarations: [
     QuestionsComponent,

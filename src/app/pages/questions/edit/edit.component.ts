@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NbTagComponent, NbTagInputAddEvent } from '@nebular/theme';
+import { FullQuestion, QuestData, Speech } from '../../../@core/backend/interfaces/quest';
 
 @Component({
   templateUrl: 'edit.component.html',
@@ -8,34 +10,63 @@ import { NbTagComponent, NbTagInputAddEvent } from '@nebular/theme';
 export class EditComponent implements OnInit {
   stepOne: boolean = true;
   keyword = [];
+  question: FullQuestion;
+  speeches: Speech[];
   constructor(
-    public dialogRef: MatDialogRef<EditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { body: any, title?: string }) { }
+    private servise: QuestData,
+    private route: ActivatedRoute,
+    private router: Router,
+
+  ) { }
   ngOnInit() {
-    if (this.data.body.keyword.length) {
-      this.keyword = this.data.body.keyword.split(',');
-    }
+    this.route.data.subscribe(data => {
+      const { mode } = data;
+      if (mode === 'create') {
+        this.question = {
+          text: '',
+          keywords: [],
+          id: 0,
+          speeches: [],
+        };
+      }
+      if (mode === 'detail') {
+        this.route.queryParams.subscribe(params => {
+          const { id } = params;
+          this.servise.getQuestion(id).subscribe(question => {
+            this.question = question;
+          });
+        });
+      }
+    });
   }
 
   onTagRemove(tagToRemove: NbTagComponent): void {
-    this.keyword = this.keyword.filter(tag => tag !== tagToRemove.text);
+    this.question.keywords = this.question.keywords.filter(tag => tag !== tagToRemove.text);
   }
 
   onTagAdd({ value, input }: NbTagInputAddEvent): void {
     if (value) {
-      this.keyword.push(value);
+      this.question.keywords.push(value);
     }
     input.nativeElement.value = '';
   }
 
   cansel(): void {
-    this.dialogRef.close();
+    // this.dialogRef.close();
   }
   onSubmit(): void {
     const data = {
-      ...this.data.body,
-    };
-    data.keyword = this.keyword.join(',');
-    this.dialogRef.close(data);
+      text: this.question.text,
+      keywords: this.question.keywords,
+    }
+    if (this.question.id) {
+      this.servise.editQuestion(data, this.question.id).subscribe(res => {
+        // this.dialogRef.close(res);
+      });
+    } else {
+      this.servise.createQestion(data).subscribe(res => {
+        this.question = res;
+      });
+    }
   }
 }

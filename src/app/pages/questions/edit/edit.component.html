@@ -1,36 +1,21 @@
-<nb-card dir="rtl" style="width: 800px;" class="m-0">
-  <nb-card-header>{{data.title||'ویرایش سوال'}}</nb-card-header>
+<nb-card dir="rtl" class="m-0">
+  <nb-card-header>ویرایش سوال</nb-card-header>
   <nb-card-body>
     <div>
       <label>سوال:</label>
-      <textarea nbInput fullWidth placeholder="سوال" [(ngModel)]="data.body.title"></textarea>
-    </div>
-    <hr>
-    <div>
-      <label>پاسخ:</label>
-      <textarea nbInput fullWidth placeholder="پاسخ" [(ngModel)]="data.body.text"></textarea>
+      <textarea nbInput fullWidth placeholder="سوال" [(ngModel)]="question.text"
+        [status]="question.text.length ? 'basic':'danger'"></textarea>
     </div>
     <hr>
     <div>
       <label>کلیدواژه:</label>
       <nb-tag-list (tagRemove)="onTagRemove($event)">
-        <nb-tag *ngFor="let tag of keyword" [text]="tag" removable></nb-tag>
-        <input type="text" nbTagInput (tagAdd)="onTagAdd($event)" fullWidth>
+        <nb-tag *ngFor="let tag of question.keywords" [text]="tag" removable></nb-tag>
+        <input type="text" nbTagInput (tagAdd)="onTagAdd($event)" fullWidth
+          [status]="question.keywords.length ? 'basic':'danger'">
       </nb-tag-list>
     </div>
     <hr>
-    <div>
-      <label>فایل:</label>
-      <br>
-      <div *ngIf="data.body.file_name">
-        <audio controls class="col-12">
-          <source src="{{data.body.file_name}}" type="audio/wav">
-        </audio>
-        <br>
-        <label>جایگزینی:</label>
-      </div>
-      <input type="file" fullWidth>
-    </div>
   </nb-card-body>
   <nb-card-footer>
     <div class="d-flex justify-content-between">
