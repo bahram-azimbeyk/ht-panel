@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { QuestData, Speech } from '../../@core/backend/interfaces/quest';
@@ -17,17 +18,29 @@ export class SpeechesComponent implements OnInit {
   data: Speech[];
   srcAudio = environment.apiUrl + '/media/';
 
+  length: number;
+  pageIndex: number = 0;
+  pageLimit: number = 50;
+  limit: string = '25';
+  isLoading: boolean = false;
+  pageEvent: PageEvent = { pageSize: 25, pageIndex: 0, length: 25 };
+
   constructor(
     private servise: QuestData,
     private dialog: MatDialog,
     private router: Router) { }
   ngOnInit() {
-    this.getData();
+    this.refreshData();
   }
 
-  getData() {
-    this.servise.getSpeechesList().subscribe(res => {
+  refreshData() {
+    this.pageLimit = Number(this.limit);
+    this.isLoading = true;
+    this.pageIndex = this.pageEvent?.pageIndex || 0;
+    this.servise.getSpeechesList(this.pageIndex + 1, this.pageLimit).subscribe(res => {
       this.data = res.data;
+      this.length = res.total;
+      this.isLoading = false;
     });
   }
 
@@ -35,7 +48,7 @@ export class SpeechesComponent implements OnInit {
     const dialogRef = this.dialog.open(SpeechDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.getData();
+        this.refreshData();
       }
     });
 
@@ -44,7 +57,7 @@ export class SpeechesComponent implements OnInit {
     const dialogRef = this.dialog.open(SpeechDialogComponent, { data: JSON.parse(JSON.stringify(row)) });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.getData();
+        this.refreshData();
       }
     });
   }
@@ -54,7 +67,7 @@ export class SpeechesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.servise.deleteSpeech(id).subscribe(res => {
-          this.getData();
+          this.refreshData();
         });
       }
     });

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import {
   NbActionsModule, NbAutocompleteModule, NbButtonModule, NbCardModule, NbDatepickerModule, NbDialogModule, NbFormFieldModule,
   NbIconModule, NbInputModule, NbListModule, NbMenuModule, NbRadioModule, NbSelectModule, NbSpinnerModule,
@@ -17,6 +17,8 @@ import { SettingsModule } from './settings/settings.module';
 import { TestModule } from './test/test.module';
 import { SpeechesModule } from './speeches/speeches.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginator, MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import { Subject } from 'rxjs';
 
 const NB_MODULES = [
 
@@ -42,8 +44,27 @@ const NB_MODULES = [
   FormsModule,
   MatTableModule,
   MatDialogModule,
+  MatPaginatorModule,
   CommonModule,
 ];
+@Injectable()
+export class MyCustomPaginatorIntl implements MatPaginatorIntl {
+  changes = new Subject<void>();
+
+  firstPageLabel = 'صفحه اول';
+  itemsPerPageLabel = 'تعداد نمایش در صفحه';
+  lastPageLabel = 'صفحه آخر';
+  nextPageLabel = 'صفحه بعد';
+  previousPageLabel = 'صفحه قبل';
+  getRangeLabel(page: number, pageSize: number, length: number): string {
+    if (length === 0) {
+      return 'صفحه 1 از 1';
+    }
+    const amountPages = Math.ceil(length / pageSize);
+    return `صفحه ${page + 1} از ${amountPages}`;
+  }
+}
+
 @NgModule({
   imports: [
     PagesRoutingModule,
@@ -55,6 +76,9 @@ const NB_MODULES = [
     PagesComponent,
   ],
   exports: [NB_MODULES],
+  providers: [
+    { provide: MatPaginatorIntl, useClass: MyCustomPaginatorIntl },
+  ],
 })
 export class PagesModule {
 }

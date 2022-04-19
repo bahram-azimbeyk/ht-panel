@@ -55,4 +55,8 @@ export class QuestService extends QuestData {
     return this.api.deleteSpeech(s_id);
   }
 
+  restartNlu(): Observable<any> {
+    return this.api.restartNlu();
+  }
+
 }

@@ -5,6 +5,7 @@ import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { QuestData } from '../../../@core/backend/interfaces/quest';
 
 @Component({
   selector: 'ngx-header',
@@ -16,6 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = false;
   user: any;
+  resetTheme: string = 'success';
 
   themes = [
     {
@@ -37,7 +39,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private themeService: NbThemeService,
     private userService: UserData,
     private layoutService: LayoutService,
-    private breakpointService: NbMediaBreakpointsService) {
+    private breakpointService: NbMediaBreakpointsService,
+    private servise: QuestData) {
   }
 
   ngOnInit() {
@@ -77,6 +80,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.layoutService.changeLayoutSize();
 
     return false;
+  }
+
+  restartNlu() {
+    this.resetTheme = '';
+    this.servise.restartNlu().subscribe(
+      (data) => {
+        this.resetTheme = 'success';
+      },
+      (error) => {
+        this.resetTheme = 'danger';
+      }
+    );
   }
 
   navigateHome() {

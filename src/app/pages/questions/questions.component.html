@@ -1,4 +1,4 @@
-<nb-card>
+<nb-card [nbSpinner]="isLoading" nbSpinnerStatus="primary" nbSpinnerSize="large">
   <nb-card-header class="d-flex justify-content-between">سوالات
     <button nbButton status="success" (click)="createQuestion()">
       افزودن سوال
@@ -42,5 +42,21 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    <div *ngIf="length == 0" class="my-4 text-muted text-center">
+      اطلاعاتی برای نمایش وجود ندارد
+    </div>
+    <div class="d-flex justify-content-between">
+      <div class="d-flex align-items-center px-5">
+        <p class="my-auto mx-2 font-12px">تعداد نمایش در صفحه:</p>
+        <nb-select status="basic" selected="25" size="small" [(ngModel)]="limit" (ngModelChange)="refreshData()">
+          <nb-option value="25">25</nb-option>
+          <nb-option value="50">50</nb-option>
+          <nb-option value="100">100</nb-option>
+        </nb-select>
+      </div>
+      <mat-paginator class="col-6" [length]="length" [pageSize]="pageLimit" [pageIndex]="pageIndex" hidePageSize="true"
+        (page)="pageEvent = $event" (page)="refreshData()">
+      </mat-paginator>
+    </div>
   </nb-card-body>
 </nb-card>

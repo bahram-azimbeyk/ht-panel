@@ -59,4 +59,6 @@ export abstract class QuestData {
 
   abstract deleteSpeech(s_id: number): Observable<any>;
 
+  abstract restartNlu(): Observable<any>;
+
 }

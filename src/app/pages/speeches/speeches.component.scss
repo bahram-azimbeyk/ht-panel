@@ -8,7 +8,7 @@ table {
 }
 
 .mat-column-number {
-  max-width: 80px;
+  width: 50px;
   padding-right: 0px !important;
   margin-right: 0;
   text-align: center;
@@ -21,13 +21,7 @@ table {
   padding-left: 10px !important;
 }
 .mat-column-wav {
-  min-width: 100px;
-  border-left: #0000001a solid 1px;
-  padding-right: 5px !important;
-  padding-left: 10px !important;
-}
-.mat-column-file {
-  min-width: 100px;
+  min-width: 400px;
   border-left: #0000001a solid 1px;
   padding-right: 5px !important;
   padding-left: 10px !important;

@@ -82,4 +82,9 @@ export class QuestApi {
     return this.api.delete(`speech/${s_id}`);
   }
 
+  // nlu
+  restartNlu(): Observable<any> {
+    return this.api.post(`nlu/restart`, null);
+  }
+
 }
