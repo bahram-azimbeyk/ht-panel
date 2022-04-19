@@ -1,0 +1,31 @@
+<nb-card dir="rtl" class="m-0 w-1000" [nbSpinner]="loading" nbSpinnerStatus="primary">
+  <nb-card-header>{{data ? 'ویرایش جواب':'افزودن جواب'}}</nb-card-header>
+  <nb-card-body>
+    <div>
+      <label>متن جواب:</label>
+      <input [(ngModel)]="speech.text" nbInput fullWidth placeholder="متن جواب">
+    </div>
+    <hr>
+    <div>
+      <div class="d-flex justify-content-between">
+        <label>فایل صوتی:</label>
+        <button *ngIf="speech.wav_path" nbButton status="success" (click)="speech.wav_path=''">جایگزینی فایل</button>
+      </div>
+      <input *ngIf="!speech.wav_path" type="file" accept="audio/wav" (change)="fileOnChange($event)" nbInput fullWidth>
+      <audio *ngIf="speech.wav_path" controls class="mt-1 col" preload="metadata">
+        <source [src]="srcAudio + speech.wav_path" type="audio/wav">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <div class="d-flex justify-content-between">
+      <button nbButton status="success" (click)="onSubmit() " [disabled]="!speech.text|| (!data && !file)">
+        {{data ? 'ویرایش':'افزودن'}}
+      </button>
+      <button nbButton status="danger" (click)="cansel()">
+        انصراف
+      </button>
+    </div>
+  </nb-card-footer>
+</nb-card>

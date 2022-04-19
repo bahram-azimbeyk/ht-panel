@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import {
-  NbActionsModule, NbButtonModule, NbCardModule, NbDatepickerModule, NbDialogModule, NbFormFieldModule,
+  NbActionsModule, NbAutocompleteModule, NbButtonModule, NbCardModule, NbDatepickerModule, NbDialogModule, NbFormFieldModule,
   NbIconModule, NbInputModule, NbListModule, NbMenuModule, NbRadioModule, NbSelectModule, NbSpinnerModule,
   NbTabsetModule, NbTagModule, NbTooltipModule, NbUserModule,
 } from '@nebular/theme';
@@ -15,6 +15,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { QuestionsModule } from './questions/questions.module';
 import { SettingsModule } from './settings/settings.module';
 import { TestModule } from './test/test.module';
+import { SpeechesModule } from './speeches/speeches.module';
 import { MatDialogModule } from '@angular/material/dialog';
 
 const NB_MODULES = [
@@ -36,6 +37,7 @@ const NB_MODULES = [
   NbTagModule,
   NbDialogModule,
   NbFormFieldModule,
+  NbAutocompleteModule,
   ReactiveFormsModule,
   FormsModule,
   MatTableModule,

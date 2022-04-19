@@ -1,26 +1,61 @@
-<nb-card dir="rtl" class="m-0">
-  <nb-card-header>ویرایش سوال</nb-card-header>
+<nb-card dir="rtl" class="m-0" [nbSpinner]="loading" nbSpinnerStatus="primary">
+  <nb-card-header>{{ question?.id ? "ویرایش سوال":"افزودن سوال" }}</nb-card-header>
   <nb-card-body>
-    <div>
-      <label>سوال:</label>
-      <textarea nbInput fullWidth placeholder="سوال" [(ngModel)]="question.text"
-        [status]="question.text.length ? 'basic':'danger'"></textarea>
+    <div *ngIf="question">
+      <div>
+        <label>سوال:</label>
+        <textarea nbInput fullWidth placeholder="سوال" [(ngModel)]="question.text"
+          [status]="question.text.length ? 'basic':'danger'"></textarea>
+      </div>
+      <hr>
+      <div>
+        <label>کلیدواژه:</label>
+        <nb-tag-list (tagRemove)="onTagRemove($event)">
+          <nb-tag *ngFor="let tag of question.keywords" [text]="tag" removable></nb-tag>
+          <input type="text" nbTagInput (tagAdd)="onTagAdd($event)" fullWidth
+            [status]="question.keywords.length ? 'basic':'danger'">
+        </nb-tag-list>
+      </div>
     </div>
     <hr>
-    <div>
-      <label>کلیدواژه:</label>
-      <nb-tag-list (tagRemove)="onTagRemove($event)">
-        <nb-tag *ngFor="let tag of question.keywords" [text]="tag" removable></nb-tag>
-        <input type="text" nbTagInput (tagAdd)="onTagAdd($event)" fullWidth
-          [status]="question.keywords.length ? 'basic':'danger'">
-      </nb-tag-list>
+    <div *ngIf="question?.id">
+      <div class="d-flex justify-content-between">
+        <label> جواب:</label>
+        <button nbButton status="info" (click)="addAnswer()">افزودن جواب</button>
+      </div>
+      <div *ngIf="question.answer_list.answer_parts" class="d-flex flex-column p-3">
+        <nb-card *ngFor="let item of question.answer_list.answer_parts; let i=index" class="col-12">
+          <nb-card-body class="d-flex">
+            <div class="col-11">
+              <p>{{item.speech?.text || item.answer_type.type}}</p>
+              <audio *ngIf="item.speech" controls class="mt-1 col" preload="metadata">
+                <source [src]="srcAudio + item.speech.wav_path" type="audio/wav">
+                Your browser does not support the audio element.
+              </audio>
+            </div>
+            <div class="col-1">
+              <button nbButton status="info" (click)="shiftAnswer(i,'upward')" ghost [disabled]="i==0">
+                <nb-icon icon="arrow-upward"></nb-icon>
+              </button>
+              <button nbButton status="info" (click)="shiftAnswer(i,'downward')" ghost
+                [disabled]="i == question.answer_list.answer_parts.length-1">
+                <nb-icon icon="arrow-downward"></nb-icon>
+              </button>
+              <button nbButton status="danger" (click)="deleteAnswer(i)" ghost>
+                <nb-icon icon="trash-outline"></nb-icon>
+              </button>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </div>
+      <div *ngIf="!question.answer_list.answer_parts.length" class="text-center text-muted"> هیچ جوابی وجود ندارد</div>
     </div>
-    <hr>
   </nb-card-body>
   <nb-card-footer>
     <div class="d-flex justify-content-between">
-      <button nbButton status="success" (click)="onSubmit()">
-        ثبت
+      <button nbButton status="success" (click)="onSubmit()"
+        [disabled]="!(question?.text && question?.keywords.length)">
+        {{ question?.id ? "ویرایش":"افزودن" }}
       </button>
       <button nbButton status="danger" (click)="cansel()">
         انصراف

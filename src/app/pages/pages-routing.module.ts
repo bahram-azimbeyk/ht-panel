@@ -6,6 +6,7 @@ import { QuestionsComponent } from './questions/questions.component';
 import { TestComponent } from './test/test.component';
 import { SettingsComponent } from './settings/settings.component';
 import { EditComponent } from './questions/edit/edit.component';
+import { SpeechesComponent } from './speeches/speeches.component';
 
 const routes: Routes = [{
   path: '',
@@ -28,6 +29,9 @@ const routes: Routes = [{
       data: {
         mode: 'detail',
       },
+    }, {
+      path: 'speeches',
+      component: SpeechesComponent,
     }, {
       path: 'test',
       component: TestComponent,

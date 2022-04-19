@@ -1,0 +1,49 @@
+<nb-card dir="rtl" class="m-0 w-1000" [nbSpinner]="loading" nbSpinnerStatus="primary">
+  <nb-card-header>افزودن جواب</nb-card-header>
+  <nb-card-body>
+    <div>
+      <label>نوع جواب:</label>
+      <nb-select placeholder="نوع جواب" fullWidth [(ngModel)]="answerType" (selectedChange)="speech=null">
+        <nb-option *ngFor="let item of types" [value]="item"> {{item.type}}</nb-option>
+      </nb-select>
+    </div>
+    <hr>
+    <div *ngIf="answerType?.has_speech">
+      <label>انتخاب جواب:</label>
+      <div class="d-flex">
+        <nb-form-field class="col pr-0">
+          <nb-icon nbPrefix icon="search"></nb-icon>
+          <input type="text" nbInput fullWidth (input)="search()" [(ngModel)]="searchInp" [nbAutocomplete]="auto">
+          <nb-autocomplete #auto (selectedChange)="onSelectChange($event)">
+            <nb-option *ngFor="let item of speeches" [value]="item">
+              {{ item.text }}
+            </nb-option>
+          </nb-autocomplete>
+        </nb-form-field>
+        <button nbButton shape="round" status="info" (click)="addSpeech()">
+          <nb-icon icon="plus"></nb-icon>
+        </button>
+      </div>
+      <nb-card *ngIf="speech" class="col mt-2">
+        <nb-card-body>
+          <p>{{speech.text}}</p>
+          <audio controls class="col">
+            <source [src]="srcAudio + speech.wav_path" type="audio/wav">
+            Your browser does not support the audio element.
+          </audio>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <div class="d-flex justify-content-between">
+      <button nbButton status="success" (click)="onSubmit()"
+        [disabled]="!answerType || (answerType?.has_speech && !speech)">
+        افزودن
+      </button>
+      <button nbButton status="danger" (click)="cansel()">
+        انصراف
+      </button>
+    </div>
+  </nb-card-footer>
+</nb-card>

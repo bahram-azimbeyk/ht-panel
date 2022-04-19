@@ -2,7 +2,7 @@ import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { QuestApi } from '../api/quest.api';
-import { FullQuestion, QuestData, Question, QuestionPagination } from '../interfaces/quest';
+import { QuestData, Question, QuestionPagination, SpeechPagination } from '../interfaces/quest';
 
 @Injectable()
 export class QuestService extends QuestData {
@@ -15,7 +15,7 @@ export class QuestService extends QuestData {
     return this.api.getQuestionsList(pageNumber, pageSize);
   }
 
-  getQuestion(q_id: number): Observable<FullQuestion> {
+  getQuestion(q_id: number): Observable<Question> {
     return this.api.getQuestion(q_id);
   }
 
@@ -31,8 +31,20 @@ export class QuestService extends QuestData {
     return this.api.deleteQuestion(q_id);
   }
 
-  createSpeech(speech: any, q_id: number): Observable<any> {
-    return this.api.createSpeech(speech, q_id);
+  getAnswerTypes(): Observable<any> {
+    return this.api.getAnswerTypes();
+  }
+
+  editAnswer(q_id: number, data: any) {
+    return this.api.editAnswer(q_id, data);
+  }
+
+  getSpeechesList(pageNumber?: number, pageSize?: number, filter?: string): Observable<SpeechPagination> {
+    return this.api.getSpeechesList(pageNumber, pageSize, filter);
+  }
+
+  createSpeech(speech: any): Observable<any> {
+    return this.api.createSpeech(speech);
   }
 
   editSpeech(speech: any, s_id: number): Observable<any> {

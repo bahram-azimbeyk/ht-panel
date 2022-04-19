@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { EditComponent } from './edit/edit.component';
 import { ConfirmDialogComponent } from './confirmDialog/dialog.component';
+import { AnswerComponent } from './edit/answerDialog/answer.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { ConfirmDialogComponent } from './confirmDialog/dialog.component';
     QuestionsComponent,
     EditComponent,
     ConfirmDialogComponent,
+    AnswerComponent,
   ],
 })
 export class QuestionsModule {

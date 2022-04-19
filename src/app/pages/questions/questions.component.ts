@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { title } from 'process';
-import { FullQuestion, QuestData } from '../../@core/backend/interfaces/quest';
+import { QuestData, Question } from '../../@core/backend/interfaces/quest';
 import { ConfirmDialogComponent } from './confirmDialog/dialog.component';
 import { EditComponent } from './edit/edit.component';
 
@@ -14,7 +14,7 @@ import { EditComponent } from './edit/edit.component';
 export class QuestionsComponent implements OnInit {
 
   displayedColumns: string[] = ['number', 'text', 'keyword', 'edit', 'delete'];
-  data: FullQuestion[];
+  data: Question[];
   headerList = ['title', 'text', 'keyword', 'file_name'];
   constructor(
     private servise: QuestData,
@@ -35,13 +35,13 @@ export class QuestionsComponent implements OnInit {
     this.router.navigate(['/questions/create']);
   }
 
-  edit(row: FullQuestion) {
-    const dialogRef = this.dialog.open(EditComponent, {
-      data: { body: JSON.parse(JSON.stringify(row)) },
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.getData();
-    });
+  edit(row: Question) {
+    // const dialogRef = this.dialog.open(EditComponent, {
+    //   data: { body: JSON.parse(JSON.stringify(row)) },
+    // });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   this.getData();
+    // });
     this.router.navigate(['/questions/detail'], { queryParams: { id: row.id } });
   }
 

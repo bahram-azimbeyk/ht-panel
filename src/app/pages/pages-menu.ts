@@ -8,6 +8,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
+    title: 'جواب ها',
+    icon: 'cube-outline',
+    link: '/speeches',
+  },
+  {
     title: 'تست',
     icon: 'cube-outline',
     link: '/test',
