@@ -1,6 +1,7 @@
 import { Injectable, NgModule } from '@angular/core';
 import {
-  NbActionsModule, NbAutocompleteModule, NbButtonModule, NbCardModule, NbDatepickerModule, NbDialogModule, NbFormFieldModule,
+  NbActionsModule, NbAutocompleteModule, NbButtonModule, NbCardModule,
+  NbDatepickerModule, NbDialogModule, NbFormFieldModule,
   NbIconModule, NbInputModule, NbListModule, NbMenuModule, NbRadioModule, NbSelectModule, NbSpinnerModule,
   NbTabsetModule, NbTagModule, NbTooltipModule, NbUserModule,
 } from '@nebular/theme';

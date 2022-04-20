@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
-import { title } from 'process';
 import { QuestData, Question } from '../../@core/backend/interfaces/quest';
 import { ConfirmDialogComponent } from './confirmDialog/dialog.component';
-import { EditComponent } from './edit/edit.component';
 
 @Component({
   selector: 'ngx-hoshtel-question',
@@ -16,7 +14,6 @@ export class QuestionsComponent implements OnInit {
 
   displayedColumns: string[] = ['number', 'text', 'keyword', 'edit', 'delete'];
   data: Question[];
-  headerList = ['title', 'text', 'keyword', 'file_name'];
 
   length: number;
   pageIndex: number = 0;
@@ -51,12 +48,6 @@ export class QuestionsComponent implements OnInit {
   }
 
   edit(row: Question) {
-    // const dialogRef = this.dialog.open(EditComponent, {
-    //   data: { body: JSON.parse(JSON.stringify(row)) },
-    // });
-    // dialogRef.afterClosed().subscribe(result => {
-    //   this.getData();
-    // });
     this.router.navigate(['/questions/detail'], { queryParams: { id: row.id } });
   }
 

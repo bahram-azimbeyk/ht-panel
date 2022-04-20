@@ -45,9 +45,9 @@
     <div *ngIf="length == 0" class="my-4 text-muted text-center">
       اطلاعاتی برای نمایش وجود ندارد
     </div>
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between ">
       <div class="d-flex align-items-center px-5">
-        <p class="my-auto mx-2 font-12px">تعداد نمایش در صفحه:</p>
+        <p class="my-auto mx-2 font-12px text-muted">تعداد نمایش در صفحه:</p>
         <nb-select status="basic" selected="25" size="small" [(ngModel)]="limit" (ngModelChange)="refreshData()">
           <nb-option value="25">25</nb-option>
           <nb-option value="50">50</nb-option>
