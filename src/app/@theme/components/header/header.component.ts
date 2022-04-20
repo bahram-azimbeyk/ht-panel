@@ -90,7 +90,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       },
       (error) => {
         this.resetTheme = 'danger';
-      }
+      },
     );
   }
 
