@@ -1,0 +1,16 @@
+<nb-card dir="rtl" class="m-0 w-1000" [nbSpinner]="loading" nbSpinnerStatus="primary">
+  <nb-card-header>{{ systemVoice.voice_name }}</nb-card-header>
+  <nb-card-body>
+      <input type="file" accept="audio/wav" (change)="fileOnChange($event)" nbInput fullWidth>
+  </nb-card-body>
+  <nb-card-footer>
+    <div class="d-flex justify-content-between">
+      <button nbButton status="success" (click)="onSubmit() " [disabled]="!file">
+        ویرایش
+      </button>
+      <button nbButton status="danger" (click)="cansel()">
+        انصراف
+      </button>
+    </div>
+  </nb-card-footer>
+</nb-card>

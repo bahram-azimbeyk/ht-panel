@@ -59,4 +59,11 @@ export class QuestService extends QuestData {
     return this.api.restartNlu();
   }
 
+  getSystemVoices(): Observable<any> {
+    return this.api.getSystemVoices();
+  }
+
+  uploadSystemVoice(systemVoice: any): Observable<any> {
+    return this.api.uploadSystemVoice(systemVoice);
+  }
 }

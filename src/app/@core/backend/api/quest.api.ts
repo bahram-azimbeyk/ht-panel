@@ -87,4 +87,11 @@ export class QuestApi {
     return this.api.post(`nlu/restart`, null);
   }
 
+  getSystemVoices(): Observable<any> {
+    return this.api.get('system/voices');
+  }
+  uploadSystemVoice(systemVoice: any): Observable<any> {
+    return this.api.put('system/voice', systemVoice);
+  }
+
 }
