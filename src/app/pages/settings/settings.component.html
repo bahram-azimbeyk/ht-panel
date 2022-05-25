@@ -1,2 +1,24 @@
-settings
-<div *ngIf="true">slam</div>
+<nb-card [nbSpinner]="loading" nbSpinnerStatus="primary">
+  <nb-card-header></nb-card-header>
+  <nb-card-body>
+    <div
+      *ngFor="let systemVoice of systemVoices | keyvalue"
+      class="d-flex align-items-center mb-2"
+    >
+      <label class="col-1">{{ systemVoice.key }}</label>
+      <audio controls class="col-4" preload="metadata">
+        <source [src]="srcAudio + systemVoice.value" type="audio/wav" />
+        Your browser does not support the audio element.
+      </audio>
+      <button
+        nbButton
+        outline
+        status="info"
+        size="small"
+        (click)="editSystemVoice({voice_name: systemVoice.key, wav: systemVoice.value})"
+      >
+        ویرایش
+      </button>
+    </div>
+  </nb-card-body>
+</nb-card>

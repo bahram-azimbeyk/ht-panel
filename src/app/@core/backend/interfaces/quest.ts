@@ -61,4 +61,8 @@ export abstract class QuestData {
 
   abstract restartNlu(): Observable<any>;
 
+  abstract getSystemVoices(): Observable<any>;
+
+  abstract uploadSystemVoice(systemVoice: any): Observable<any>;
+
 }
